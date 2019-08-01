@@ -1,0 +1,20 @@
+{
+    "schema_version": 2,
+    "timestamp": 1564607178,
+    "workspace": {
+        "0": [
+            [
+                {
+                    "panes": [
+                        {
+                            "type": "term",
+                            "directory": "/home/jth"
+                        }
+                    ],
+                    "label": "fish /home/jth",
+                    "custom_label_set": false
+                }
+            ]
+        ]
+    }
+}
