@@ -2,21 +2,47 @@
 # wm independent hotkeys
 #
 
+# pywal
+super + shift + m
+	wal -i /home/jth/Pictures/ && bspc wm -r
+
 # fancy lock
 super + shift + l
 	/home/jth/.config/i3/i3lock-fancy-multimonitor/lock -n -p
 
 
-# scratchpad
-#super + u
-#	scratchtermtoggle
+super + w
+    id=$(bspc query -N -n "focused");\
+    if [ -n "$id" ];then \
+        xprop -id $id -f _SCRATCH 32ii -set _SCRATCH $(date +%s,%N);\
+        bspc node -t "floating";\
+        xdotool windowunmap $id;\
+    fi
 
-# negative -w arg to account for a border width (default: 100%)
-alt + s
-    tdrop -ma -w -4 -y "$PANEL_HEIGHT" -s dropdown alacritty
+super + shift + w
+i=$(bspc query -W -w "focused.floating");\
+    if [ -n "$i" ];then \
+        xprop -id $i -f _SCRATCH 32ii -set _SCRATCH $(date +%s,%N);\
+        xdotool windowunmap $i;\
+    else;\
+        i=`for w in $(xwininfo -root -children | grep -e "^\s*0x[0-9a-f]\+" -o);do \
+            t=$(xprop -id $w _SCRATCH | grep ' = \(.*\)');\
+            if [ -n "$t" ];then \
+                echo $t $w;\
+            fi;\
+           done|sort -n|head -n1|cut -d" " -f 5`;\
+        if [ -n "$i" ];then \
+            xprop -id $i -remove _SCRATCH;\
+            bspc rule -a \* state=floating center=true --one-shot;\
+            xdotool windowmap $i;\
+            bspc window -f $i;\
+        fi;\
+     fi
+    
+
 
 # firefox
-super + w
+super + x
 	firefox
 
 # thunar
@@ -25,7 +51,7 @@ super + q
 
 # terminal emulator
 super + a
-	alacritty
+	xfce4-terminal
 
 # program launcher
 super + d
@@ -43,9 +69,13 @@ super + Escape
 super + alt + {w,r}
 	bspc {quit,wm -r}
 
-# close and kill
+# close
 super + shift + q
-	bspc node -{c,k}
+	bspc node -c
+
+# kill
+super + shift + ctrl + q
+	bspc node -k
 
 # alternate between the tiled and monocle layout
 super + m

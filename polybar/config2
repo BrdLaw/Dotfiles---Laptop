@@ -1,0 +1,245 @@
+[colors]
+background = #75000407
+background-alt = #d1c4e99
+foreground = #ffffff
+foreground-alt = #555
+primary = #ffb52a
+secondary = #e60053
+alert = #ff5555
+
+[bar/example]
+width = 100%
+height = 24
+radius = 0.0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = "DejavuSansBook:pixelsize=12;2"
+font-1 = "MaterialIcons-Regular:pixelsize=11;2"
+
+modules-left = bspwm windowtitle
+modules-center = mpd
+modules-right = volume cpu battery network date shutdown
+
+tray-position = right
+tray-padding = 4
+tray-background = #689D6A
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+monitor = ${env:MONITOR:}
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %index%
+label-focused-background = #83a598
+lable-focused-foreground = #000
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+label-occupied = %index%
+label-occupied-padding = 2
+
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+label-empty = %index%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
+; Separator in between workspaces
+; label-separator = |
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = #83a598
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-background = #D79921
+label-focused-foreground = #000s
+label-focused-underline = ${module/bspwm.label-focused-underline}
+label-focused-padding = ${module/bspwm.label-focused-padding}
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+label-unfocused-foreground = #000
+label-unfocused-background =#D79921
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${module/bspwm.label-urgent-background}
+label-urgent-padding = ${module/bspwm.label-urgent-padding}
+
+; Separator in between workspaces
+; label-separator = |
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/windowtitle]
+type = internal/xwindow
+format = <label>
+label = %title%
+label-maxlen = 40
+format-foreground = #D79921
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/mpd]
+type = internal/mpd
+format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause =  
+icon-next = 
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+formats-foreground = #ECB32E
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/volume]
+type = internal/pulseaudio
+format-volume =  "<ramp-volume> <label-volume> "
+ramp-volume-0 =""
+ramp-volume-0-font = 2
+ramp-volume-1 = ""
+ramp-volume-1-font = 2
+ramp-volume-2 =" "
+ramp-volume-2-font = 2
+format-volume-background = #CC241D
+format-volume-foreground = #000
+
+format-muted = <label-muted>
+format-muted-background = #ffb86c
+format-muted-foreground = #000
+label-muted ="  "
+format-muted-font = 2
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 100
+
+format-padding = 1
+
+format-charging = <label-charging>
+format-charging-prefix = " "
+format-charging-prefix-font = 2
+label-charging = "%percentage%% " 
+
+format-discharging = <label-discharging>
+label-discharging = "%percentage%% "
+format-discharging-prefix = " "
+format-discharging-prefix-font = 2
+format-discharging-padding = 1
+
+format-discharging-background = #ff5555
+format-discharging-foreground = #000
+
+format-charging-background = #ff7528
+format-charging-foreground = #000
+format-charging-padding = 1
+
+label-full = 
+format-full-background = #ff5555
+format-full-foreground = #000
+format-full-prefix-font = 1
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = " "
+format-prefix-font = 2
+format-prefix-foreground = #000
+format-underline = #f90000
+label = %percentage:2%%
+format-background = #98971A
+format-foreground = #000
+format-padding = 1
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/network]
+type = internal/network
+interface = enp27s0
+format-connected = <label-connected>
+format-connected-prefix = " "
+format-connected-prefix-font = 2
+label-connected = " Don't Call it a Comeback%downspeed:9% "
+label-connected-font = 1
+
+format-disconnected = <label-disconnected>
+label-disconnected = 
+label-disconnected-font = 2
+
+format-connected-background = #458588
+format-connected-foreground = #000
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/date]
+type = internal/date
+interval = 1
+
+date = 
+date-alt = "%A, %b %d"
+
+time = "%I:%M %p "
+time-alt = "%I:%M:%S %p "
+
+format-prefix = " "
+format-prefix-font = 2
+format-prefix-foreground = #000
+format-background = #B16286
+format-foreground = #000
+
+label = %date% %time%
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/shutdown]
+type = custom/text
+content = 
+content-background = #689D6A
+content-padding = 2
+click-left = systemctl suspend
+click-right = systemctl poweroff
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosini
+
+
+
