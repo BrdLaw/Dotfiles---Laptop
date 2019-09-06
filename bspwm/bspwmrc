@@ -1,38 +1,25 @@
-#! /bin/sh
+#! /bin/bash
 
 #kill previous session
 #pkill compton
 
-
 sxhkd &
-
 ~/.config/polybar/launch.sh &
 #xfce4-panel &
-
+/usr/lib/xfce4/notifyd/xfce4-notifyd &
 compton -b --config ~/.config/compton/compton.conf &
-
-nitrogen --restore &
-
+#nitrogen --restore &
+~/.fehbg &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-
 clipit &
-
 pasystray &
-
 nm-applet &
-
 blueman-applet &
-
 mpd &
-
 udiskie &
-
 pamac-tray &
-
 guake &
-
-xidlehook --not-when-fullscreen --not-when-audio --timer normal 900 'blurlock' '' &
-
+xautolock -time 10 -locker '~/.bin/glitch.sh' &
 wal -R &
 . "${HOME}/.cache/wal/colors.sh"
 

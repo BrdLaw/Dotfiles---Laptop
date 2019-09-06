@@ -2,47 +2,21 @@
 # wm independent hotkeys
 #
 
+# gestures
+gesture swipe up
+gesture swipe down
+
+
 # pywal
 super + shift + m
 	wal -i /home/jth/Pictures/ && bspc wm -r
 
-# fancy lock
+# corrupt lock
 super + shift + l
-	/home/jth/.config/i3/i3lock-fancy-multimonitor/lock -n -p
-
-
-super + w
-    id=$(bspc query -N -n "focused");\
-    if [ -n "$id" ];then \
-        xprop -id $id -f _SCRATCH 32ii -set _SCRATCH $(date +%s,%N);\
-        bspc node -t "floating";\
-        xdotool windowunmap $id;\
-    fi
-
-super + shift + w
-i=$(bspc query -W -w "focused.floating");\
-    if [ -n "$i" ];then \
-        xprop -id $i -f _SCRATCH 32ii -set _SCRATCH $(date +%s,%N);\
-        xdotool windowunmap $i;\
-    else;\
-        i=`for w in $(xwininfo -root -children | grep -e "^\s*0x[0-9a-f]\+" -o);do \
-            t=$(xprop -id $w _SCRATCH | grep ' = \(.*\)');\
-            if [ -n "$t" ];then \
-                echo $t $w;\
-            fi;\
-           done|sort -n|head -n1|cut -d" " -f 5`;\
-        if [ -n "$i" ];then \
-            xprop -id $i -remove _SCRATCH;\
-            bspc rule -a \* state=floating center=true --one-shot;\
-            xdotool windowmap $i;\
-            bspc window -f $i;\
-        fi;\
-     fi
-    
-
+	glitch.sh
 
 # firefox
-super + x
+super + w
 	firefox
 
 # thunar
@@ -51,7 +25,7 @@ super + q
 
 # terminal emulator
 super + a
-	xfce4-terminal
+	termite
 
 # program launcher
 super + d
@@ -186,3 +160,23 @@ super + ctrl + underscore
 
 super + ctrl + plus
 	~/.bin/border_inc.sh
+	
+# media keys
+XF86AudioRaiseVolume
+	pactl set-sink-volume 0 +5% && notify-send "Vol Up!"
+	
+XF86AudioLowerVolume
+	pactl set-sink-volume 0 -5% && notify-send "Vol Down!"
+	
+XF86AudioMute
+	pactl set-sink-mute 0 toggle && notify-send "Muted!"
+	
+XF86MonBrightnessUp
+	xbacklight -inc 20 && notify-send "Brightness Up!"
+	
+XF86MonBrightnessDown
+	xbacklight -dec 20 && notify-send "Brightness Down!"
+	
+					
+	
+	
