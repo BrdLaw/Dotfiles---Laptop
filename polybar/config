@@ -40,7 +40,7 @@ font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=10;3"
 font-3 = "Font Awesome 5 Brands:pixelsize=10;3"
 font-4 = "NotoEmoji Nerd Font Mono:style=Book:size=10;3"
 
-modules-left = xwindow player-mpris-tail
+modules-left = xwindow mpd
 modules-center = bspwm
 modules-right = eth sep pulseaudio memory temperature cpu date battery wlan sep powermenu
 
@@ -224,7 +224,7 @@ bar-empty-foreground = ${colors.foreground-alt}
 [module/cpu]
 type = internal/cpu
 interval = 1
-;format-underline =#ff5555
+;format-underline =#fff
 label = %percentage:2%%
 label-foreground = #8FA1B3
 
@@ -401,7 +401,7 @@ thermal-zone = 0
 warn-temperature = 60
 
 format = <ramp> <label>
-format-underline = #000
+;format-underline = #000
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 
