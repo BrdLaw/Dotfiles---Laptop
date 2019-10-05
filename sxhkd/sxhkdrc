@@ -21,7 +21,7 @@ super + w
 
 # thunar
 super + q
-	thunar
+	pcmanfm
 
 # terminal emulator
 super + a
