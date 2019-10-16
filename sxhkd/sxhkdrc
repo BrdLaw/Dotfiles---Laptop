@@ -21,7 +21,7 @@ super + w
 
 # thunar
 super + q
-	pcmanfm
+	thunar
 
 # terminal emulator
 super + a
@@ -129,6 +129,10 @@ super + ctrl + space
 super + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
+# Rotate leaves of tree
+super + shift + {comma,period}
+	bspc desktop -R {90,270} 
+
 #
 # move/resize
 #
@@ -150,16 +154,16 @@ super + {Left,Down,Up,Right}
 # extra
 
 super + underscore
-	~/.bin/gap_dec.sh
+	~/.config/bspwm_scripts/gap_dec.sh
 
 super + plus
-	~/.bin/gap_inc.sh
+	~/.config/bspwm_scripts/gap_inc.sh
 
 super + ctrl + underscore
-	~/.bin/border_dec.sh
+	~/.config/bspwm_scripts/border_dec.sh
 
 super + ctrl + plus
-	~/.bin/border_inc.sh
+	~/.config/bspwm_scripts/border_inc.sh
 	
 # media keys
 XF86AudioRaiseVolume
@@ -172,10 +176,44 @@ XF86AudioMute
 	pactl set-sink-mute 0 toggle && notify-send "Muted!"
 	
 XF86MonBrightnessUp
-	xbacklight -inc 20 && notify-send "Brightness Up!"
+	xbacklight -inc 10 && notify-send "Brightness Up!"
 	
 XF86MonBrightnessDown
-	xbacklight -dec 20 && notify-send "Brightness Down!"
+	xbacklight -dec 10 && notify-send "Brightness Down!"
+
+grave
+	termite
+
+super + grave
+	bspc node -s next
+
+super + =
+    id=$(bspc query -N -n "focused");\
+    if [ -n "$id" ];then \
+        xprop -id $id -f _SCRATCH 32ii -set _SCRATCH $(date +%s,%N);\
+        bspc node -t "floating";\
+        xdotool windowunmap $id;\
+    fi
+
+super + -
+    i=$(bspc query -N -n "focused.floating");\
+    if [ -n "$i" ];then \
+        xprop -id $i -f _SCRATCH 32ii -set _SCRATCH $(date +%s,%N);\
+        xdotool windowunmap $i;\
+    else;\
+        i=$(for w in $(xwininfo -root -children | grep -e "^\s*0x[0-9a-f]\+" -o);do \
+            t=$(xprop -id $w _SCRATCH | grep ' = \(.*\)');\
+            if [ -n "$t" ];then \
+                echo $t $w;\
+            fi;\
+        done|sort -n|head -n1|cut -d" " -f 5);\
+        if [ -n "$i" ];then \
+            xprop -id $i -remove _SCRATCH;\
+            bspc rule -a \* state=floating center=on --one-shot;\
+            xdotool windowmap $i;\
+            bspc node -f $i;\
+        fi;\
+    fi
 	
 					
 	
