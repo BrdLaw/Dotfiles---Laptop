@@ -41,7 +41,7 @@ font-3 = "Font Awesome 5 Brands:pixelsize=10;3"
 font-4 = "NotoEmoji Nerd Font Mono:style=Book:size=10;3"
 
 modules-left = xwindow mpd
-modules-center = bspwm
+modules-center = i3
 modules-right = eth sep pulseaudio memory temperature cpu date battery wlan sep powermenu
 
 tray-position = right
