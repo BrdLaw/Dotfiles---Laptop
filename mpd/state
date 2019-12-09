@@ -1,0 +1,32 @@
+sw_volume: 68
+audio_device_state:1:mpd alsamixer-output
+audio_device_state:1:toggle_visualizer
+state: stop
+current: 11
+random: 0
+repeat: 0
+single: 0
+consume: 0
+crossfade: 0
+mixrampdb: 0.000000
+mixrampdelay: -1.000000
+playlist_begin
+0:DaBaby/Blank Blank/02 - Blank Blank.mp3
+1:Billie Eilish/WHEN WE ALL FALL ASLEEP, WHERE DO WE GO/01 - !!!!!!!.mp3
+2:Billie Eilish/WHEN WE ALL FALL ASLEEP, WHERE DO WE GO/02 - bad guy.mp3
+3:Billie Eilish/WHEN WE ALL FALL ASLEEP, WHERE DO WE GO/03 - xanny.mp3
+4:Billie Eilish/WHEN WE ALL FALL ASLEEP, WHERE DO WE GO/04 - you should see me in a crown.mp3
+5:Billie Eilish/WHEN WE ALL FALL ASLEEP, WHERE DO WE GO/05 - all the good girls go to hell.mp3
+6:Billie Eilish/WHEN WE ALL FALL ASLEEP, WHERE DO WE GO/06 - wish you were gay.mp3
+7:Billie Eilish/WHEN WE ALL FALL ASLEEP, WHERE DO WE GO/07 - when the party's over.mp3
+8:Billie Eilish/WHEN WE ALL FALL ASLEEP, WHERE DO WE GO/08 - 8.mp3
+9:Billie Eilish/WHEN WE ALL FALL ASLEEP, WHERE DO WE GO/09 - my strange addiction.mp3
+10:Billie Eilish/WHEN WE ALL FALL ASLEEP, WHERE DO WE GO/10 - bury a friend.mp3
+11:Billie Eilish/WHEN WE ALL FALL ASLEEP, WHERE DO WE GO/11 - ilomilo.mp3
+12:Billie Eilish/WHEN WE ALL FALL ASLEEP, WHERE DO WE GO/12 - listen before i go.mp3
+13:Billie Eilish/WHEN WE ALL FALL ASLEEP, WHERE DO WE GO/13 - i love you.mp3
+14:Billie Eilish/WHEN WE ALL FALL ASLEEP, WHERE DO WE GO/14 - goodbye.mp3
+15:J. Cole/J. Cole - MIDDLE CHILD.mp3
+16:Bakermat/Bakermat - Learn to Lose.mp3
+17:Delta Heavy/Delta Heavy - Kaleidoscope.mp3
+playlist_end

@@ -1,80 +1,108 @@
 configuration {
-    display-drun:                   "Apps";
-    display-window:                 "Window";
-    show-icons:true;
+  show-icons:                     true;
+  icon-theme:                     "Oranchelo-Green";
+  font:                           "Droid Sans Regular 12";
+  drun-display-format:            "{name}";
 }
- 
+
 * {
-    lines: 15;
-    columns: 1;
-    background-color: #00000065;
-    border-color: #00000000;
-    text-color: #EFEFEF;
-    font: "SF Pro Text 16";
+  background-color:               transparent;
+  background:                     #00000066;
+  background-alt:                 #f2f2f233;
+  text-color:                     #D8DEE9;
+  selected-text-color:            #ffffff;
+  primary:                        #A3BE8C;
+  urgent:                         #BF616A;
 }
- 
-#window {
-    border: 0;
-    border-radius: 4px;
-    padding: 40;
-    width: 30%;
-    height: 50%;
+
+window {
+  transparency:                   "real";
+  background-color:               @background;
+  height:                         1080px;
+  width:                          1920px;
+  location:                       northwest;
+  anchor:                         northwest;
+  x-offset:                       00;
+  y-offset:                       00;
 }
- 
-#mainbox {
-    background-color: #00000000;
-    children: [inputbar, listview];
-    spacing: 10px;
-    /*margin: 20%;*/
-    padding: 30px 0;
-    border: 1px;
-    border-color: @base0D;
+
+prompt {
+  enabled: false;
 }
- 
- 
-#listview {
-    background-color: #00000000;
-    fixed-height: 0;
-    border: 0px;
-    spacing: 5px;
-    scrollbar: false;
-    padding: 10px 10px 0px;
+
+
+inputbar {
+  expand:                         false;
+  background-color:               #00000020;
+  border-radius:                  6;
+  margin:                         40px 360px 20px 360px;
+  padding:                        10px 10px 10px 10px;
+  position:                       north;
+  width:                          1px;
 }
- 
-#element {
-    background-color: #00000000;
-    border: 0;
-    border-radius: 15px;
-    padding: 3 0  3 4 ;
+
+entry {
+  /*expand:                         false;
+  width:                          20em;
+  margin:                         40px -275px 20px 355px;
+  border-radius:                  6;
+  padding:                        10px 10px 10px 10px;
+  background-color:               #00000020;
+  border:                         0px 0px solid 0px 0px;
+  border-color:                   @text-color;
+  font:                           "SFNS Display 10";*/
 }
- 
-#element selected {
-    background-color: #00a0e6;
-    text-color: #EFEFEF;
+
+
+listview {
+  columns: 6;
+  spacing: 4;
+  dynamic: false;
 }
- 
- 
-#inputbar {
-    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
-    background-color: #00000000;
+
+element {
+  border-radius: 4;
+  orientation: vertical;
+  padding: 30 0 30 0;
 }
- 
-#case-indicator {
-    background-color: #00000000;
-    spacing:    0;
+
+
+mainbox {
+  children: [ inputbar, listview ];
+  padding: 10px 160px 10px 160px;
 }
-#entry {
-    background-color: #00000000;
-    spacing:    0;
+
+element normal.urgent, element alternate.urgent {
+    background-color:               @urgent;
 }
-#prompt {
-    background-color: #00000000;
-    spacing:    0;
+
+element normal.active, element alternate.active {
+    background-color:               @background-alt;
+    color:                          @selected-text-color;
 }
- 
-#textbox-prompt-colon {
-    background-color: #00000000;
-    expand:     false;
-    str:        ":";
-    margin:     0px 0.3em 0em 0em ;
+
+element selected {
+    background-color:               @background-alt;
+    color:                          @selected-text-color;
+    border-radius:                  6;
+}
+
+element selected.urgent {
+    background-color:               @urgent;
+}
+
+element selected.active {
+    background-color:               @background-alt;
+    color:                          @selected-text-color;
+}
+
+element-icon {
+    size:                           48;
+    border:                         0px;
+}
+
+element-text {
+    expand:                         true;
+    horizontal-align:               0.5;
+    margin:                         10px 15px 0px 15px;
 }

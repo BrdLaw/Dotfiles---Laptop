@@ -1,14 +1,23 @@
-[colors]
+
+;[colors]
 ;background = ${xrdb:color0:#222}
-background = #22000000
-background-alt = #282a36
+;background = #35353585
+;background-alt = #282a36
 ;foreground = ${xrdb:color7:#222}
-foreground = #f8f8f2
-foreground-alt = #f8f8f2
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
-underline = #99ffffff
+;foreground = #f8f8f2
+;foreground-alt = #f8f8f2
+;primary = #ffb52a
+;secondary = #e60053
+;alert = #bd2c40
+;underline = #99ffffff
+
+[colors]
+background = ${xrdb:color0:#222}
+foreground = ${xrdb:color7:#222}
+foreground-alt = ${xrdb:color7:#222}
+primary = ${xrdb:color1:#222}
+secondary = ${xrdb:color2:#222}
+alert = ${xrdb:color3:#222}
 
 [bar/example]
 monitor = ${env:MONITOR:}
@@ -34,15 +43,15 @@ padding-right = 1
 module-margin-left = 0
 module-margin-right = 2
 
-font-0 = "DejavuSansBook:size=12;3"
+font-0 = "Droid Sans:size=12;3"
 font-1 = "Font Awesome 5 Free:style=Solid:pixelsize=10;3"
 font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=10;3"
 font-3 = "Font Awesome 5 Brands:pixelsize=10;3"
 font-4 = "NotoEmoji Nerd Font Mono:style=Book:size=10;3"
 
-modules-left = xwindow mpd
-modules-center = i3
-modules-right = eth sep pulseaudio memory temperature cpu date battery wlan sep powermenu
+modules-left = i3 xwindow mpd
+;modules-center = xwindow
+modules-right = eth xbacklight pulseaudio memory temperature cpu date battery wlan powermenu
 
 tray-position = right
 tray-padding = 2
@@ -162,8 +171,8 @@ ws-icon-9 = 10;
 
 label-mode = %icon%
 label-mode-padding = 2
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
+label-mode-foreground = #111
+label-mode-background = ${colors.foreground}
 
 ; focused = Active workspace on focused monitor
 label-focused = %icon%
@@ -238,7 +247,7 @@ label-foreground = #B48EAD
 
 [module/wlan]
 type = internal/network
-interface = wlp2s0
+interface = wlp3s0
 interval = 3.0
 
 ; WIRELESS CONNECTED
@@ -489,3 +498,36 @@ type = custom/script
 exec = ~/polybar-scripts/updates-arch-combined.sh
 interval = 600
 
+[module/mpd]
+; Host where mpd is running (either ip or domain name)
+; Can also be the full path to a unix socket where mpd is running.
+host = 127.0.0.1
+port = 6600
+;password = mypassword
+
+; Seconds to sleep between progressbar/song timer sync
+; Default: 1
+interval = 2
+format-online = <icon-prev> <icon-seekb> <icon-stop> <toggle> <icon-seekf> <icon-next>  <icon-repeat> <icon-random>  <bar-progress> <label-time>  <label-song>
+label-song = 𝄞 %artist% - %title%
+label-offline = 🎜 mpd is offline
+icon-play = ⏵
+icon-pause = ⏸
+icon-stop = ⏹
+icon-prev = ⏮
+icon-next = ⏭
+icon-seekb = ⏪
+icon-seekf = ⏩
+icon-random = 🔀
+icon-repeat = 🔁
+icon-repeatone = 🔂
+icon-single = 🔂
+icon-consume = ✀
+
+toggle-on-foreground = #ff
+toggle-off-foreground = #55
+
+bar-progress-width = 45
+bar-progress-indicator = |
+bar-progress-fill = ─
+bar-progress-empty = ─
