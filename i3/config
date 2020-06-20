@@ -5,53 +5,45 @@ set $mod Mod4
 # Font for window titles
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+font pango:Fantasque Sans Mono 8
 
 # borders
 new_window pixel 3
-new_float pixel 3
-hide_edge_borders both
-border_radius 6
+#new_float pixel 3
+#hide_edge_borders both
+#border_radius 6
 
 #Start programs
-exec --no-startup-id ~/.config/polybar/launch.sh
+#exec --no-startup-id ~/.config/polybar/launch.sh
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id compton -b --config ~/.config/compton/compton.conf
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
-#exec --no-startup-id blueman-applet
+exec --no-startup-id blueman-applet
 exec --no-startup-id mpd
-#exec --nostartup-id wal -R
+exec --no-startup-id wal -R
 exec --no-startup-id ~/.fehbg
-#exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
-#exec --no-startup-id pasystray
-#exec --no-startup-id xrandr --output VGA1 --auto --left-of eDP1
-#exec --no-startup-id ~/.scripts/wal.sh
-
-
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
+exec --no-startup-id pasystray
+exec --no-startup-id xfce4-volumed-pulse
+exec --no-startup-id udiskie
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy-rapid 10 10 --nofork
-
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% 
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle 
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle 
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 
+
+# whatever this is
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && notify-send "Volume Up!"
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && notify-send "Volume Down!"
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && notify-send "Muted!"
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && notify-send "Mic Muted/Unmuted!"
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 && notify-send "Brightness Up!"
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10 && notify-send "Brightness Down!"
 
 # misc
 bindsym $mod+w exec --no-startup-id chromium
-bindsym $mod+x exec --no-startup-id nautilus
+bindsym $mod+x exec --no-startup-id thunar
 
 # lock
 bindsym $mod+Shift+l exec --no-startup-id i3lock-fancy-rapid 10 10
@@ -106,8 +98,8 @@ bindsym $mod+q split toggle
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-#bindsym $mod+Shift+s layout stacking
-#bindsym $mod+Shift+w layout tabbed
+bindsym $mod+Shift+s layout stacking
+bindsym $mod+Shift+w layout tabbed
 bindsym $mod+Ctrl+e layout toggle split
 
 # toggle tiling / floating
@@ -115,12 +107,6 @@ bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-bindsym $mod+p focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
 
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -203,18 +189,18 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-#bar {
-#        status_command i3status
-#}
+bar {
+        status_command i3status
+}
 
 # Set colors from Xresources
 # Change 'color7' and 'color2' to whatever colors you want i3 to use 
 # from the generated scheme.
 # NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
 # it fails to get colors from Xresources.
-#set_from_resource $fg i3wm.color7 #181F21
-#set_from_resource $bg i3wm.color2 #8FA1B3
-#set_from_resource $ug i3wm.color1 #8FA1B3
+set_from_resource $fg i3wm.color7 #181F21
+set_from_resource $bg i3wm.color2 #8FA1B3
+set_from_resource $ug i3wm.color1 #8FA1B3
 
 # Customize colors
 # class                 border  backgr. text indicator child_border
@@ -222,7 +208,7 @@ bindsym $mod+r mode "resize"
 #client.focused_inactive $fg     $bg     $fg  $fg       $bg
 #client.unfocused        $fg     $bg     $fg  $fg       $bg
 #client.urgent           $ug     $bg     $fg  $fg       $bg
-#client.pla�ceholder      $bg     $bg     $fg  $fg       $bg
+#client.placeholder      $bg     $bg     $fg  $fg       $bg
 
 #client.background       $bg
 
@@ -232,7 +218,7 @@ bindsym $mod+r mode "resize"
 #############################
 
 # Set inner/outer gaps
-gaps inner 22
+gaps inner 16
 gaps outer 16
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
@@ -286,31 +272,19 @@ mode "$mode_gaps_outer" {
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable
-for_window [class="calamares"] floating enable
-for_window [class="Clipgrab"] floating enable
 for_window [title="File Transfer*"] floating enable
 for_window [class="Galculator"] floating enable
 for_window [class="GParted"] floating enable
-for_window [title="i3_help"] floating enable sticky enable
-for_window [class="Lightdm-settings"] floating enable
 for_window [class="Lxappearance"] floating enable sticky enable
-for_window [class="Manjaro-hello"] floating enable
-for_window [class="Manjaro Settings Manager"] floating enable
-for_window [title="MuseScore: Play Panel"] floating enable
 for_window [class="Nitrogen"] floating enable sticky enable
 for_window [class="Oblogout"] fullscreen enable
-for_window [class="octopi"] floating enable
 for_window [class="Pamac-manager"] floating enable border pixel 3
 for_window [class="Pavucontrol"] floating enable
 for_window [class="qt5ct"] floating enable sticky enable
 for_window [class="Qtconfig-qt4"] floating enable sticky enable
 for_window [class="Simple-scan"] floating enable
-for_window [class="(?i)System-config-printer.py"] floating enable
-for_window [class="Skype"] floating enable
-for_window [class="Timeset-gui"] floating enable
 for_window [class="(?i)virtualbox"] floating enable
 for_window [class="Xfburn"] floating enable
-#for_window [class="Plank"] floating enable
 for_window [class="File-roller"] floating enable border pixel 3
 for_window [class="Gcolor3"] floating enable border pixel 3
 for_window [class="Minecraft launcher"] floating enable border pixel 3
@@ -321,7 +295,6 @@ for_window [class="Xfce4-panel"] floating enable border pixel 3
 for_window [class="Org.gnome.gedit"] border pixel 3
 for_window [class="Nautilus"] border pixel 3
 for_window [class="Shutter"] floating enable border pixel 3
-for_window [class="Gnome-boxes"] border pixel 3
 for_window [class="Gnome-calculator"] floating enable border pixel 3
 for_window [class="Eog"] floating enable border pixel 3
 for_window [class="Lollypop"] border pixel 3
